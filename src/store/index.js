@@ -37,7 +37,7 @@ const cartSlice = createSlice({
     return newState;
 },
 }
-});
+  })
 export const cartActions = cartSlice.actions;
 export const store = configureStore({
   reducer: {
@@ -84,7 +84,6 @@ export const fetchCartData = () => {
       }
   }
 }
-
 /*
 addToCart({
     id: 1,              let Object = {name: 12, id: 12}

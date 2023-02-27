@@ -28,24 +28,22 @@ function App() {
     dispatch(sendCartData(cartState))
   }, [cartState]);
 
-
-
-  return (
-    <div>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/products/:id" element={<SingleProductPage />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
-}
+    return (
+      <div>
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/products/:id" element={<SingleProductPage />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    );
+  }
 
 export default App;

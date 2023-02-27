@@ -6,8 +6,7 @@ function Cart() {
   
   const cartState = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const subtotal = cartState && cartState.reduce(
-    (accumulator, current) => accumulator + current.price * current.quantity,
+  const subtotal = cartState && cartState.reduce((accumulator, current) => accumulator + current.price * current.quantity,
     0
   );
 
@@ -161,4 +160,4 @@ export default Cart;
   // useEffect(() => {
   //   getCartData();
   // }, []);
-  // console.log(cartState);
+  // console.log(cartState)
