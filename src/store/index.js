@@ -40,6 +40,22 @@ export const store = configureStore({
   },
 });
 
+const sendCartData = (data) => {
+  return async (dispatch) => {
+    const sendCart = async () => {
+      const response = await fetch(
+        'https://react-ecommerce-369ac-default-rtdb.firebaseio.com/cart.json',
+        {
+          method: 'PUT',
+          body: JSON.stringify(data),
+        }
+      );
+      const responseData = await response.json();
+      return responseData;
+    };
+  };
+};
+
 /*
 addToCart({
     id: 1,              let Object = {name: 12, id: 12}

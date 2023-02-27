@@ -7,7 +7,7 @@ function Nav() {
   const [toggle, setToogle] = useState(false);
   const [active, setActive] = useState(0);
   const cartState = useSelector((state) => state.cart);
-  console.log(cartState);
+  // console.log(cartState);
   const totalProductsInCart = cartState.length;
 
   const open = () => {

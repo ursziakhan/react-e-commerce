@@ -26,6 +26,7 @@ export const getProducts = async () => {
   return products;
 };
 
+// USING put method so the cart does  not get added and instead just gets updated
 export const sendCartData = async (data) => {
   const response = await fetch(
     'https://react-ecommerce-369ac-default-rtdb.firebaseio.com/cart.json',

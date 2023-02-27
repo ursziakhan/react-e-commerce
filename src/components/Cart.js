@@ -1,10 +1,20 @@
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../store';
+import { fetchCartData } from '../utlis/dataToFirebase';
+import { useEffect, useState } from 'react';
 function Cart() {
-  const cartState = useSelector((state) => state.cart);
+  // const cartState = useSelector((state) => state.cart);
+  const [cartState, setCartState] = useState([]);
   const dispatch = useDispatch();
-
+  const getCartData = async () => {
+    const cart = await fetchCartData();
+    setCartState(cart);
+  };
+  useEffect(() => {
+    getCartData();
+  }, []);
+  // console.log(cartState);
   const subtotal = cartState.reduce(
     (accumulator, current) => accumulator + current.price * current.quantity,
     0
