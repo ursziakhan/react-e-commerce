@@ -1,22 +1,12 @@
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { cartActions } from '../store';
-import { fetchCartData } from '../utlis/dataToFirebase';
-import { useEffect, useState } from 'react';
+// import { fetchCartData } from '../utlis/dataToFirebase';
+// import { useEffect, useState } from 'react';
 function Cart() {
-  // const cartState = useSelector((state) => state.cart);
-  const [cartState, setCartState] = useState([]);
+  
+  const cartState = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const getCartData = async () => {
-    const cart = await fetchCartData();
-    setCartState(cart);
-  };
-  useEffect(() => {
-    getCartData();
-  }, []);
-  // console.log(cartState);
-  const subtotal = cartState.reduce(
-    (accumulator, current) => accumulator + current.price * current.quantity,
+  const subtotal = cartState && cartState.reduce((accumulator, current) => accumulator + current.price * current.quantity,
     0
   );
 
@@ -69,7 +59,7 @@ function Cart() {
                           +
                         </button>
                         <form>
-                          <label for="Line1Qty" className="sr-only">
+                          <label htmlFor="Line1Qty" className="sr-only">
                             {' '}
                             Quantity{' '}
                           </label>
@@ -162,3 +152,12 @@ function Cart() {
 }
 
 export default Cart;
+
+// const getCartData = async () => {
+  //   const cart = await fetchCartData();
+  //   setCartState(cart);
+  // };
+  // useEffect(() => {
+  //   getCartData();
+  // }, []);
+  // console.log(cartState)

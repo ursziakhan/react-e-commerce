@@ -31,8 +31,13 @@ const cartSlice = createSlice({
       );
       state = state.splice(itemInCart, 1);
     },
-  },
-});
+  
+  replaceCart: (state, action) => {
+    const newState = [...action.payload];
+    return newState;
+},
+}
+  })
 export const cartActions = cartSlice.actions;
 export const store = configureStore({
   reducer: {
@@ -40,22 +45,45 @@ export const store = configureStore({
   },
 });
 
-const sendCartData = (data) => {
+export const sendCartData = (cart) => {
   return async (dispatch) => {
-    const sendCart = async () => {
-      const response = await fetch(
-        'https://react-ecommerce-369ac-default-rtdb.firebaseio.com/cart.json',
-        {
-          method: 'PUT',
-          body: JSON.stringify(data),
-        }
-      );
-      const responseData = await response.json();
-      return responseData;
-    };
-  };
-};
 
+      const sendData = async () => {
+          const response = await fetch('https://react-ecommerce-369ac-default-rtdb.firebaseio.com/cart.json', {
+              method: 'PUT',
+              body: JSON.stringify(cart),
+          })
+          if(!response.ok) {
+              throw new Error('Sending cart data failed');
+          }
+      }
+
+      try {
+          await sendData();
+      } catch(error) {
+          console.log(error.message)
+      }
+  }
+}
+
+export const fetchCartData = () => {
+  return async dispatch => {
+      const fetchData = async () => {
+          const response = await fetch('https://react-ecommerce-369ac-default-rtdb.firebaseio.com/cart.json');
+          if(!response.ok) throw new Error('Could Not Fetch Cart Data');
+          const data = await response.json();
+          return data;
+      }
+
+      try {
+          const cartData = await fetchData();
+          dispatch(cartActions.replaceCart(cartData));
+
+      } catch (error){
+        console.log(error.message)
+      }
+  }
+}
 /*
 addToCart({
     id: 1,              let Object = {name: 12, id: 12}
